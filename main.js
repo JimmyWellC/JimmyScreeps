@@ -5,6 +5,14 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 
+var a= Game.rooms['sim'].controller.pos;
+var rn = a.roomName;
+var x = a.x;
+var y = a.y;//asdasdasd
+var aa = new RoomPosition(x-1,y-1,rn);
+
+console.log(aa);
+
 module.exports.loop = function () {
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {

@@ -5,15 +5,15 @@ module.exports = function() {
             // create a worker as big as possible with the given energy
             var body = [];
             while(energy>0){
-                if (energy>100) body.push(WORK);
-                else if (energy>50) body.push(MOVE); break;
+                if (energy>100) body.push(WORK); energy -= 100;
+                else if (energy>50) body.push(MOVE); energy -= 50; break;
                 else break;
-                if (energy>100) body.push(WORK);
-                else if (energy>50) body.push(MOVE); break;
+                if (energy>100) body.push(WORK); energy -= 100;
+                else if (energy>50) body.push(MOVE); energy -= 50; break;
                 else break;
-                if (energy>50) body.push(MOVE);
+                if (energy>50) body.push(MOVE); energy -= 50;
                 else break;
-                if (energy>50) body.push(CARRY);
+                if (energy>50) body.push(CARRY); energy -= 50;
                 else break;
             }
             // create creep with the created body and the given role

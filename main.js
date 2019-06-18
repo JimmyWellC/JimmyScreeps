@@ -5,11 +5,14 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 
-var a= Game.rooms['sim'].controller.pos;
+var room = Game.rooms['sim']
+var a= room.controller.pos;
 var rn = a.roomName;
 var x = a.x;
 var y = a.y;//asdasdasd
 var aa = new RoomPosition(x-1,y-1,rn);
+
+room.createConstructionSite(x, y, "extension")
 
 console.log(aa);
 

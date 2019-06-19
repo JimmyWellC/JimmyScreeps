@@ -44,7 +44,7 @@ module.exports.loop = function () {
 
     for (let roomName in Game.rooms) {
         // run room logic
-        Game.rooms[roomName].memoryInitialization()
+        Game.rooms[roomName].sourceMemoryInitialization()
         // Game.rooms[roomName].spawnSpawnsIfNecessary();
     }
 

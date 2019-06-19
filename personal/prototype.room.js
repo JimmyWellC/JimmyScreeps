@@ -8,16 +8,37 @@ Room.prototype.roomSpawnsCount = function () {
 };
 
 
-Room.prototype.memoryInitialization=
+Room.prototype.sourceMemoryInitialization =
     function () {
-        let controllerLevel = this.controller.level;
-        if (controllerLevel===2){
-            this.memory.containSources = this.find(FIND_SOURCES).map(s => s.id);
-            // console.log("source:", this.memory.containSources);
+        const controllerLevel = this.controller.level;
+        const Terrain = Game.map.getRoomTerrain(this.name)
+        if (controllerLevel === 2) {
+            this.memory.containSourceId = this.find(FIND_SOURCES).map(s => s.id);
+            // console.log("source:", this.memory.containSourceId);
+            for (let sourceId of this.memory.containSourceId) {
+                let source = Game.getObjectById(sourceId);
+                let sourcePosition = source.pos;
+                let x = sourcePosition.x;
+                let y = sourcePosition.y;
+                let source1DistanceWall = wallCheck(Terrain, x - 1, y - 1) + wallCheck(Terrain, x, y - 1)
+                    + wallCheck(Terrain, x + 1, y - 1) + wallCheck(Terrain, x - 1, y)
+                    + wallCheck(Terrain, x + 1, y) + wallCheck(Terrain, x - 1, y + 1)
+                    + wallCheck(Terrain, x, y + 1) + wallCheck(Terrain, x + 1, y + 1)
+
+
+            }
         }
     };
 
-
+wallCheck =
+    function (Terrain, x, y) {
+    /** */
+        if (Terrain.get(x, y) !== TERRAIN_MASK_WALL) {
+            return 1
+        } else {
+            return 0
+        }
+    };
 
 
 Room.prototype.spawnSpawnsIfNecessary =

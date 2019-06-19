@@ -5,18 +5,22 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 
-var room = Game.rooms['sim']
-var a= room.controller.pos;
-var rn = a.roomName;
-var x = a.x;
-var y = a.y;//asdasdasd
-var aa = new RoomPosition(x-1,y-1,rn);
-
-room.createConstructionSite(x, y, "extension")
-
-console.log(aa);
 
 module.exports.loop = function () {
+    var room = Game.rooms['W8N3'];
+    var a = room.controller.pos;
+    var rn = a.roomName;
+    var x = a.x;
+    var y = a.y;//asdasdasd
+    var aa = new RoomPosition(x - 1, y, rn);
+
+    // console.log(room.createConstructionSite(x, y, "extension"));
+
+    // console.log();
+    // T = Game.map.getRoomTerrain('W8N3');
+    // console.log(T.get(29, 21));
+
+
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {
         // and checking if the creep is still alive
@@ -42,8 +46,7 @@ module.exports.loop = function () {
         // if creep is builder, call builder script
         else if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
-        }
-        else if (creep.memory.role == 'repairer') {
+        } else if (creep.memory.role == 'repairer') {
             roleRepairer.run(creep);
         }
     }
@@ -91,8 +94,7 @@ module.exports.loop = function () {
     else if (numberOfBuilders < minimumNumberOfBuilders) {
         // try to spawn one
         name = Game.spawns.Spawn1.createCustomCreep(energy, 'builder');
-    }
-    else {
+    } else {
         // else try to spawn a builder
         name = Game.spawns.Spawn1.createCustomCreep(energy, 'builder');
     }

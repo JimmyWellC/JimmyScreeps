@@ -3,9 +3,9 @@ module.exports = function() {
     StructureSpawn.prototype.createCustomCreep =
         function(energy, roleName) {
             // create a worker as big as possible with the given energy
-            var body = [WORK, CARRY, MOVE];
-            energy -= 200;
-            while(energy>0){
+            var body = [WORK, WORK,CARRY, MOVE];
+            energy -= 300;
+            while(energy>10){
                 if (energy>100) {body.push(WORK); energy -= 100;}
                 else if (energy>50) {body.push(MOVE); energy -= 50; break;}
                 else break;

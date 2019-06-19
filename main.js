@@ -7,19 +7,58 @@ var roleRepairer = require('role.repairer');
 
 
 module.exports.loop = function () {
-    var room = Game.rooms['W8N3'];
-    var a = room.controller.pos;
-    var rn = a.roomName;
-    var x = a.x;
-    var y = a.y;//asdasdasd
-    var aa = new RoomPosition(x - 1, y, rn);
+    // var room1 = Game.rooms['W8N3'];
+    // var a = room1.controller.pos;
+    // var rn = room1.name;
+    // var x = a.x;
+    // var y = a.y;//asdasdasd
+    // var aa = new RoomPosition(x - 1, y, rn);
 
     // console.log(room.createConstructionSite(x, y, "extension"));
 
     // console.log();
     // T = Game.map.getRoomTerrain('W8N3');
     // console.log(T.get(29, 21));
+    //
+    // const AA = new RoomPosition(10, 16, rn);
+    // const BB = new RoomPosition(15, 16, rn);
+    //
+    // // const Path1 = room1.findPath(AA, BB, {ignoreCreeps: true});
+    // // const Path2 = room1.findPath(BB, AA);
+    //
+    // // console.log(Path1[0].direction);
+    //
+    // const A = Game.creeps['Adeline'];
+    // A.memory.role = 'aaa';
+    // A.memory.working = 0;
+    // // console.log('A', A.memory.role);
+    // const B = Game.creeps['Alexandra'];
+    // B.memory.role = 'aaa';
+    // B.memory.working = 1;
+    //
+    // // A.moveTo(10, 16);
+    // // B.moveTo(15, 16);
+    //
+    //
+    // for (const cr of [A, B]) {
+    //     // console.log(A);
+    //     if (cr.memory.working === 0) {
+    //         cr.moveByPath(room1.findPath(cr.pos, BB, {ignoreCreeps: true}));
+    //     }
+    //     if (cr.memory.working === 1) {
+    //         cr.moveByPath(room1.findPath(cr.pos, AA, {ignoreCreeps: true}));
+    //     }
+    //     if (cr.pos === BB) {
+    //         cr.memory.working = 1;
+    //     }
+    //     if (cr.pos === AA) {
+    //         cr.memory.working = 0;
+    //     }
+    // }
+    //
 
+    // A.moveTo(10,16);
+    // B.moveTo(10,16);
 
     // check for memory entries of died creeps by iterating over Memory.creeps
     for (let name in Memory.creeps) {
@@ -52,10 +91,10 @@ module.exports.loop = function () {
     }
 
     // setup some minimum numbers for different roles
-    var minimumNumberOfHarvesters = 4;
+    var minimumNumberOfHarvesters = 2;
     var minimumNumberOfUpgraders = 1;
     var minimumNumberOfBuilders = 1;
-    var minimumNumberOfRepairers = 2;
+    var minimumNumberOfRepairers = 5;
 
     // count the number of creeps alive for each role
     // _.sum will count the number of properties in Game.creeps filtered by the
@@ -96,12 +135,13 @@ module.exports.loop = function () {
         name = Game.spawns.Spawn1.createCustomCreep(energy, 'builder');
     } else {
         // else try to spawn a builder
-        name = Game.spawns.Spawn1.createCustomCreep(energy, 'builder');
+        // name = Game.spawns.Spawn1.createCustomCreep(energy, 'harvester');
+        // console.log('aa');
     }
 
     // print name to console if spawning was a success
     // name > 0 would not work since string > 0 returns false
-    if (!(name < 0)) {
-        console.log("Spawned new creep: " + name);
-    }
+    // if (!(name < 0)) {
+    //     console.log("Spawned new creep: " + name);
+    // }
 };

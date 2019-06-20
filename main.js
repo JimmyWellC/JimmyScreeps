@@ -35,33 +35,42 @@ module.exports.loop = function () {
     // B.moveTo(19, 18);
 
 
-    const A = Game.creeps['Skyler'];
-    A.memory.role = 'aaa';
-    A.memory.working = false;
-
-    // A.memory.pathMoving = false;
-    // A.moveTo(15, 24);
-
-
-    const AA = new RoomPosition(15, 24, A.room.name);
-    const BB = new RoomPosition(35, 24, A.room.name);
-
-    var PathAB = A.room.findPath(AA, BB);
-    // // // PathAB.shift();
-    // // // PathAB.shift();
+    const A = Game.creeps['Benjamin'];
+    // A.memory.role = 'aaa';
+    // A.memory.working = false;
+    //
+    // // A.memory.pathMoving = false;
+    // // A.moveTo(15, 24);
+    //
+    //
+    // const AA = new RoomPosition(15, 24, A.room.name);
+    // const AA1 = new RoomPosition(16, 23, A.room.name);
+    // const BB = new RoomPosition(35, 24, A.room.name);
+    //
+    // var PathAB = A.room.findPath(AA, BB);
+    // // // // PathAB.shift();
+    // // // // PathAB.shift();
 
     // console.log(PathAB[0].x, PathAB[0].y, PathAB[PathAB.length -1].x, PathAB[PathAB.length -1].y);
-    // console.log(A.pos.isEqualTo(15,24));
-    // console.log(!(1===3));
+    // // console.log(A.pos.isEqualTo(15,24));
+    // // console.log(!(1===3));
+    //
+    //
+    // A.moveAndRepairByPath(AA, PathAB);
+    // // A.moveByPath(A.room.findPath(A.pos, BB, {ignoreCreeps: true}));
+    // // A.moveByPath(PathAB);
 
 
-    A.moveAndRepairByPath(AA, PathAB);
-    // A.moveByPath(A.room.findPath(A.pos, BB, {ignoreCreeps: true}));
-    // A.moveByPath(PathAB);
 
-
-
-
+    // var a = true;
+    // var i = 1;
+    // while(a){
+    //     i++;
+    //     if (i>5){
+    //         a = false;
+    //     }
+    // }
+    // console.log(i);
 
 
 
@@ -118,7 +127,7 @@ module.exports.loop = function () {
     }
 
     // setup some minimum numbers for different roles
-    var minimumNumberOfHarvesters = 20;
+    var minimumNumberOfHarvesters = 3;
     var minimumNumberOfUpgraders = 1;
     var minimumNumberOfBuilders = 0;
     var minimumNumberOfRepairers = 0;

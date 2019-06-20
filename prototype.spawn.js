@@ -52,7 +52,13 @@ Creep.prototype.moveAndRepairByPath =
             if (this.pos.isEqualTo(endX, endY)) {
                 this.memory.pathMoving = false;
             } else {
-                // console.log(!this.pos.isEqualTo(realPath[0].x, realPath[0].y));
+                console.log(realPath[0].x, realPath[0].y);
+                realPath.shift();
+                console.log(realPath[0].x, realPath[0].y);
+                realPath.shift();
+                console.log(realPath[0].x, realPath[0].y);
+                realPath.shift();
+                console.log(!this.pos.isEqualTo(realPath[0].x, realPath[0].y));
                 // while (!this.pos.isEqualTo(realPath[0].x, realPath[0].y)) {
                 //     realPath.shift();
                 // }

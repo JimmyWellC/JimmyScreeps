@@ -20,11 +20,44 @@ Room.prototype.sourceMemoryInitialization =
                 let sourcePosition = source.pos;
                 let x = sourcePosition.x;
                 let y = sourcePosition.y;
-                let source1DistanceWall = wallCheck(Terrain, x - 1, y - 1) + wallCheck(Terrain, x, y - 1)
-                    + wallCheck(Terrain, x + 1, y - 1) + wallCheck(Terrain, x - 1, y)
-                    + wallCheck(Terrain, x + 1, y) + wallCheck(Terrain, x - 1, y + 1)
-                    + wallCheck(Terrain, x, y + 1) + wallCheck(Terrain, x + 1, y + 1)
+                // let source1DistanceWall = wallCheck(Terrain, x - 1, y - 1) + wallCheck(Terrain, x, y - 1)
+                //     + wallCheck(Terrain, x + 1, y - 1) + wallCheck(Terrain, x - 1, y)
+                //     + wallCheck(Terrain, x + 1, y) + wallCheck(Terrain, x - 1, y + 1)
+                //     + wallCheck(Terrain, x, y + 1) + wallCheck(Terrain, x + 1, y + 1);
+                var source1DistanceWall = [];
+                for (let i = 0; i <= 3; i++) {
+                    source1DistanceWall[i] = [];
+                    for (let j = 0; j < 3; j++) {
+                        source1DistanceWall[i][j] = wallCheck(Terrain, x - 1 + i, y - 1 + j);
+                    }
+                }
 
+                for (let i = -5; i <= 5; i++) {
+                    for (let j = -5; j <= 5; j++) {
+                        if((i === j||i === -j || i === 0 || j === 0)){
+
+                        }
+
+                    }
+                }
+
+                for (let i = -5; i <= 5; i++) {
+                    for (let j = -5; j <= 5; j++) {
+                        // 排除所有的奇数点
+                        if((i+j)%2)
+                            continue;
+                        // 排除中心9宫格
+                        else if (i >= -1 && i <= 1 && j >= -1 && j <= 1)
+                            continue;
+                        // 找到开辟好的Road
+                        else if (i === j||i === -j || i === 0 || j === 0)
+                            continue;
+                        else if () {
+
+                        }
+                        finish
+                    }
+                }
 
             }
         }
@@ -32,7 +65,7 @@ Room.prototype.sourceMemoryInitialization =
 
 wallCheck =
     function (Terrain, x, y) {
-    /** */
+        /** */
         if (Terrain.get(x, y) !== TERRAIN_MASK_WALL) {
             return 1
         } else {

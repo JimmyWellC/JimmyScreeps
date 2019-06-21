@@ -24,18 +24,25 @@ Room.prototype.sourceMemoryInitialization =
                 //     + wallCheck(Terrain, x + 1, y - 1) + wallCheck(Terrain, x - 1, y)
                 //     + wallCheck(Terrain, x + 1, y) + wallCheck(Terrain, x - 1, y + 1)
                 //     + wallCheck(Terrain, x, y + 1) + wallCheck(Terrain, x + 1, y + 1);
-                var source1DistanceWall = [];
-                for (let i = 0; i <= 3; i++) {
-                    source1DistanceWall[i] = [];
-                    for (let j = 0; j < 3; j++) {
-                        source1DistanceWall[i][j] = wallCheck(Terrain, x - 1 + i, y - 1 + j);
+                // var source1DistanceWall = [];
+                let source1DistanceWall = {};
+                for (let i = x - 1; i <= x + 1; i++) {
+                    for (let j = y - 1; j < y + 1; j++) {
+                        //check if (i,j) is a wall
+                        if (i === x && j === y) {
+                            source1DistanceWall[(i, j)] = "Source";
+                        } else {
+                            source1DistanceWall[(i, j)] = wallCheck(Terrain, i, j)
+                        }
                     }
                 }
 
+
+
                 for (let i = -5; i <= 5; i++) {
                     for (let j = -5; j <= 5; j++) {
-                        if((i === j||i === -j || i === 0 || j === 0)){
-
+                        if ((i === j || i === -j || i === 0 || j === 0)) {
+                            this.createFlag(x + i, y + j, undefined, COLOR_RED, COLOR_RED)
                         }
 
                     }
@@ -44,13 +51,13 @@ Room.prototype.sourceMemoryInitialization =
                 for (let i = -5; i <= 5; i++) {
                     for (let j = -5; j <= 5; j++) {
                         // 排除所有的奇数点
-                        if((i+j)%2)
+                        if ((i + j) % 2)
                             continue;
                         // 排除中心9宫格
                         else if (i >= -1 && i <= 1 && j >= -1 && j <= 1)
                             continue;
                         // 找到开辟好的Road
-                        else if (i === j||i === -j || i === 0 || j === 0)
+                        else if (i === j || i === -j || i === 0 || j === 0)
                             continue;
                         else if () {
 
@@ -65,7 +72,8 @@ Room.prototype.sourceMemoryInitialization =
 
 wallCheck =
     function (Terrain, x, y) {
-        /** */
+        /** Return 1 if (x,y) is not a wall.
+         *  Return 0 if (x,y) is a wall. */
         if (Terrain.get(x, y) !== TERRAIN_MASK_WALL) {
             return 1
         } else {

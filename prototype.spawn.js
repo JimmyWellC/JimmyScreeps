@@ -3,9 +3,11 @@ StructureSpawn.prototype.createCustomCreep =
         // create a worker as big as possible with the given energy
         // calculate the level of given energy.
         const energyLevel = Math.floor(energy / 50);
+        let body = [];
         if (roleName === "harvester")
-            const body = createMiniMovementBody(energyLevel);
-
+            body = createMiniMovementBody(energyLevel);
+        else
+            body = createShortMovementBody(energyLevel);
 
         // create creep with the created body and the given role
         return this.createCreep(body, undefined, {role: roleName, working: false, pathMoving: false});
@@ -42,48 +44,39 @@ createMiniMovementBody =
             // most difficult part for the optimization.
             for (let i = 0; i < temp + 1; i++)
                 body.push(WORK);
-            let x;
-
+            const moveCount = Math.floor((energyLevel - temp - 1) / 5);
+            const carryCount = energyLevel - moveCount - 2 * (temp + 1);
+            for (let i = 0; i < carryCount; i++)
+                body.push(CARRY);
+            for (let i = 0; i < moveCount; i++)
+                body.push(MOVE);
         }
-
         return body;
     };
 
 
-createBodyOnRoad =
-    function (energy) {
+createShortMovementBody =
+    function (energyLevel) {
+        const distance = 20;
         let body = [];
-        while (energy > 0) {
-            if (energy >= 50 && body.length < 50) {
-                body.push(MOVE);//push MOVE part
-                energy -= 50;
-            } else break;
-
-            if (energy >= 50 && body.length < 50) {
-                body.push(CARRY);//push CARRY part
-                energy -= 50;
-            } else break;
-
-            if (energy >= 100 && body.length < 50) {
-                body.push(WORK);
-                energy -= 100;
-            } else if (energy >= 50 && body.length < 50) {
-                body.push(MOVE);
-                energy -= 50;
-                break;
-            } else break;
-
-            if (energy >= 100 && body.length < 50) {
-                body.push(WORK);
-                energy -= 100;
-            } else if (energy >= 50 && body.length < 50) {
-                body.push(MOVE);
-                energy -= 50;
-                break;
-            } else break;
+        let bestWorkCount, bestCarryCount, maxEfficiency = 0;
+        for (let workCount = 1; workCount <= 2 * energyLevel / 5; workCount++) {
+            let carryCount = Math.floor((2 * energyLevel - 5 * workCount) / 3);
+            let efficiency = (50 * workCount * carryCount) / (2 * distance * workCount + 25 * carryCount);
+            if (efficiency > maxEfficiency)
+                bestWorkCount = workCount; bestCarryCount = carryCount;
         }
+        const bestMoveCount = energyLevel - 2 * bestWorkCount - bestCarryCount;
+        for (let i = 0; i < bestWorkCount; i++)
+            body.push(WORK);
+        for (let i = 0; i < bestCarryCount; i++)
+            body.push(CARRY);
+        for (let i = 0; i < bestMoveCount; i++)
+            body.push(MOVE);
         return body;
     };
+
+
 
 
 createBalancedCreep =
